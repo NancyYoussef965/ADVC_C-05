@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +13,18 @@ namespace ADVC_C_05
         protected virtual void OnEmployeeLayOff(EmployeeLayOffEventArgs e)
         {
             EmployeeLayOff?.Invoke(this, e);
+        }
+
+        // Removed duplicate method declaration
+        public virtual void EndOfYearOperation()
+        {
+            int age = DateTime.Now.Year - BirthDate.Year;
+            if (BirthDate.Date > DateTime.Now.AddYears(-age)) age--;
+
+            if (age > 60)
+            {
+                OnEmployeeLayOff(new EmployeeLayOffEventArgs(LayOffCause.AgeAbove60));
+            }
         }
 
         public int EmployeeID { get; set; }
@@ -44,17 +55,6 @@ namespace ADVC_C_05
             }
 
             return true;
-        }
-
-        public void EndOfYearOperation()
-        {
-            int age = DateTime.Now.Year - BirthDate.Year;
-            if (BirthDate.Date > DateTime.Now.AddYears(-age)) age--;
-
-            if (age > 60)
-            {
-                OnEmployeeLayOff(new EmployeeLayOffEventArgs(LayOffCause.AgeAbove60));
-            }
         }
     }
 

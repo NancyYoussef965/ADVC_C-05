@@ -9,8 +9,8 @@ namespace MyApp
         #region q1
         enum LayOffCause
         {
-            VacationStockNegative,   
-            AgeAbove60             
+            VacationStockNegative,
+            AgeAbove60
         }
         #endregion
         static void Main(string[] args)
@@ -31,7 +31,7 @@ namespace MyApp
 
             emp.RequestVacation(DateTime.Now, DateTime.Now.AddDays(10));
 
-            emp.EndOfYearOperation();
+            ((ADVC_C_05.Employee)emp).EndOfYearOperation();
 
             #endregion
 
